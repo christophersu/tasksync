@@ -51,8 +51,7 @@ def main(argv):
 
   try:
     sync = TaskSync(service)
-
-    test_json = {}
+    sync.sync('MTY1ODY1NTcwNjczNzI4MzI0MTg6Mzk5ODEzMTU5OjA')
 
   except client.AccessTokenRefreshError:
     print ('The credentials have been revoked or expired, please re-run'
