@@ -38,6 +38,12 @@ class TaskSync():
                             # print result['completed']
                         tasks_to_sync.pop(i)
 
+        # clear completed tasks (cleared tasks will be hidden and not displayed in the calendar)
+        # self.service.tasks().clear(tasklist=google_tasklist).execute()
+        # alternatively, just set the `hidden` attribute of specific tasks to true:
+        # task['hidden'] = True
+        # result = self.service.tasks().update(tasklist=google_tasklist, task=task['id'], body=task).execute()
+
         # add new tasks
         for task in tasks_to_sync:
             result = self.service.tasks().insert(tasklist=google_tasklist, body={
