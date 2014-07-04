@@ -6,22 +6,7 @@ class TaskSync():
         for tasklist in tasklists['items']:
             print json.dumps(tasklist)
 
-    def sync(self, google_tasklist, tasks_to_sync=None, done_tasks=None):
-        # eventually: sync(self, json, tasklist)
-        # assume you receive data in the following format
-        tasks_to_sync = [
-            {
-                "_id": "41911c31f5629ad3c6ec7aa504000c40",
-                "name": "Write report",
-                "due": "2012-03-01T12:00:00Z"
-            }
-        ]
-
-        # get these by either looking at the last 100 events or getting all tasks from done
-        done_tasks = [
-            "41911c31f5629ad3c6ec7aa504000c40"
-        ]
-
+    def sync(self, tasks_to_sync, done_tasks, google_tasklist):
         # get tasks that are already there
         existing = self.service.tasks().list(tasklist=google_tasklist).execute()
 
@@ -40,7 +25,7 @@ class TaskSync():
 
         # clear completed tasks (cleared tasks will be hidden and not displayed in the calendar)
         # self.service.tasks().clear(tasklist=google_tasklist).execute()
-        # alternatively, just set the `hidden` attribute of specific tasks to true:
+        # alternatively, just set the `hidden` attribute of specific tasks to true (this way you can clear tasks after a specified amount of time)
         # task['hidden'] = True
         # result = self.service.tasks().update(tasklist=google_tasklist, task=task['id'], body=task).execute()
 

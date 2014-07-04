@@ -51,7 +51,22 @@ def main(argv):
 
   try:
     sync = TaskSync(service)
-    sync.sync('MTY1ODY1NTcwNjczNzI4MzI0MTg6Mzk5ODEzMTU5OjA')
+
+    # assume you receive data in the following format
+    tasks_to_sync = [
+        {
+            "_id": "41911c31f5629ad3c6ec7aa504000c40",
+            "name": "Write report",
+            "due": "2012-03-01T12:00:00Z"
+        }
+    ]
+
+    # get these by either looking at the last 100 events or getting all tasks from done
+    done_tasks = [
+        "41911c31f5629ad3c6ec7aa504000c40"
+    ]
+
+    sync.sync(tasks_to_sync, done_tasks, 'MTY1ODY1NTcwNjczNzI4MzI0MTg6Mzk5ODEzMTU5OjA')
 
   except client.AccessTokenRefreshError:
     print ('The credentials have been revoked or expired, please re-run'
