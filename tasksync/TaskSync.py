@@ -1,11 +1,6 @@
 import json
 
 class TaskSync():
-    def test(self):
-        tasklists = self.service.tasklists().list().execute()
-        for tasklist in tasklists['items']:
-            print json.dumps(tasklist)
-
     def sync(self, tasks_to_sync, done_tasks, google_tasklist):
         # get tasks that are already there
         existing = self.service.tasks().list(tasklist=google_tasklist).execute()
