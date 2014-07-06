@@ -11,11 +11,9 @@ class TaskSync():
                 cur_id = tasks_to_sync[i]['_id']
                 if 'notes' in task.keys():
                     if task['notes'] == cur_id :
-                        # print 'found duplicate'
                         if cur_id in done_tasks:
                             task['status'] = 'completed'
                             result = self.service.tasks().update(tasklist=google_tasklist, task=task['id'], body=task).execute()
-                            # print result['completed']
                         tasks_to_sync.pop(i)
 
         # clear completed tasks (cleared tasks will be hidden and not displayed in the calendar)
@@ -31,7 +29,6 @@ class TaskSync():
                 'notes': task['_id'],
                 'due': task['due']
             }).execute()
-            print result['id']
 
     def __init__(self, service):
         self.service = service
